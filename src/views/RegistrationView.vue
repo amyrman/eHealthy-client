@@ -1,13 +1,22 @@
+<script setup lang="ts">
+import RegistrationForm from '../components/RegistrationForm.vue'
+
+</script>
+
 <template>
-  <div class="registration">
-    <h1>This is the registration page</h1>
-  </div>
+  <main>
+    <div class="registration">
+      <h1>This is the REGISTRATION page</h1>
+    </div>
+
+    <RegistrationForm />
+
+  </main>
 </template>
 
 <style>
 @media (min-width: 1024px) {
   .registration {
-    min-height: 100vh;
     text-align: center;
   }
 }
