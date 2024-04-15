@@ -6,25 +6,28 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
+  <v-app>
     <header>
-        <nav>
+        <v-app-bar>
           <v-btn :to="'/'">Home</v-btn>
           <v-btn :to="'/about'">About</v-btn>
           <v-btn :to="'/registration'">Registration</v-btn>
           <v-btn :to="'/login'">Login</v-btn>
           <v-btn :to="'/dashboard'">Dashboard</v-btn>
-        </nav>
+        </v-app-bar>
     </header>
 
   <RouterView />
+
+</v-app>
 </template>
 
 <style scoped>
-header {
+/* header {
   top: 0;
   width: 100%;
   line-height: 1.5;
-}
+} */
 
 .logo {
   display: block;
