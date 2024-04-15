@@ -1,4 +1,4 @@
-import './assets/main.css'
+// import './assets/main.css' TODO: check + remove
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

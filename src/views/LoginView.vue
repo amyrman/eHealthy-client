@@ -1,12 +1,12 @@
 <template>
-  <div class="about">
-    <h1>This is the about page</h1>
+  <div class="login">
+    <h1>This is the login page</h1>
   </div>
 </template>
 
 <style>
 @media (min-width: 1024px) {
-  .about {
+  .login {
     min-height: 100vh;
     text-align: center;
   }
