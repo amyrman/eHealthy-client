@@ -1,5 +1,7 @@
 <script lang="ts">
 import { emailRules, passwordRules, firstRules, lastRules, termsRules } from '../utils/formRules'
+import http from '../http-common'
+
 export default {
   data: () => ({
     first: null,
@@ -13,6 +15,21 @@ export default {
     lastRules,
     termsRules
   }),
+  methods: {
+    async submitForm() {
+      try {
+        const response = await http.post('/registration', {
+          first: this.first,
+          last: this.last,
+          email: this.email,
+          password: this.password
+        })
+        // TODO: handle response...
+      } catch (error) {
+        // TODO: handle error...
+      }
+    }
+  }
 }
 </script>
 
