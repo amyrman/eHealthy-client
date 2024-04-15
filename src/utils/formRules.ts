@@ -6,5 +6,5 @@ export const emailRules = [
 export const passwordRules = [
   (value: string) => value ? true : 'Password is required.',
       (value: string) =>
-        value && value.length >= 8 ? true : 'Password must be at least 8 characters long.'
+        (value && value.length >= 8) ? true : 'Password must be at least 8 characters long.'
 ]
