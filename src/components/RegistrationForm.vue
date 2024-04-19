@@ -13,20 +13,29 @@ export default {
     passwordRules,
     firstRules,
     lastRules,
-    termsRules
+    termsRules,
+    errorMessage: ''
   }),
   methods: {
     async submitForm() {
       try {
-        const response = await http.post('/registration', {
-          first: this.first,
-          last: this.last,
+        const response = await http.post('/users/register', {
+          firstname: this.first,
+          lastname: this.last,
           email: this.email,
           password: this.password
         })
-        // TODO: handle response...
+        
+        if (response.status === 200) {
+          this.$router.push('/login')
+        } else {
+          // The server responded with a status other than 200 OK
+          this.errorMessage = 'Registration failed. Please try again.'
+        }
       } catch (error) {
-        // TODO: handle error...
+          // An error occurred while trying to send the request
+          // This could be a network error, or some other issue
+          this.errorMessage = 'An error occurred. Please try again.'
       }
     }
   }
@@ -87,5 +96,6 @@ export default {
         </v-btn>
       </v-card-actions>
     </v-form>
+    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
   </v-card>
 </template>
