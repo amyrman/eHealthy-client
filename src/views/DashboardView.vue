@@ -7,7 +7,6 @@
 <style>
 @media (min-width: 1024px) {
   .dashboard {
-    min-height: 100vh;
     text-align: center;
   }
 }
