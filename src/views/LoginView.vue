@@ -5,7 +5,7 @@ import LoginForm from '../components/LoginForm.vue'
 
 <template>
   <main>
-    <div class="registration">
+    <div class="login">
       <h1>This is the LOGIN page</h1>
     </div>
 
@@ -16,7 +16,7 @@ import LoginForm from '../components/LoginForm.vue'
 
 <style>
 @media (min-width: 1024px) {
-  .registration {
+  .login {
     text-align: center;
   }
 }
