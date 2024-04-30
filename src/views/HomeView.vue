@@ -4,6 +4,6 @@ import TheWelcome from '../components/TheWelcome.vue'
 
 <template>
   <main>
-    <TheWelcome />
+    <h1 style="text-align: center">Landing page to come...</h1>
   </main>
 </template>

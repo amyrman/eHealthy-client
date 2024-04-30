@@ -1,6 +1,7 @@
 <script lang="ts">
 import { emailRules, passwordRules, firstRules, lastRules, termsRules } from '../utils/formRules'
 import http from '../http-common'
+import ErrorMessage from './ErrorMessage.vue'
 
 export default {
   data: () => ({
@@ -25,19 +26,22 @@ export default {
           email: this.email,
           password: this.password
         })
-        
-        if (response.status === 200) {
+
+        if (response.status === 201) {
           this.$router.push('/login')
         } else {
-          // The server responded with a status other than 200 OK
+          // The server responded with a status other than 201 CREATED
           this.errorMessage = 'Registration failed. Please try again.'
         }
       } catch (error) {
-          // An error occurred while trying to send the request
-          // This could be a network error, or some other issue
-          this.errorMessage = 'An error occurred. Please try again.'
+        // An error occurred while trying to send the request
+        // This could be a network error, or some other issue
+        this.errorMessage = 'An error occurred. Please try again.'
       }
     }
+  },
+  components: {
+    ErrorMessage
   }
 }
 </script>
@@ -96,6 +100,6 @@ export default {
         </v-btn>
       </v-card-actions>
     </v-form>
-    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+    <ErrorMessage :message="errorMessage" />
   </v-card>
 </template>
