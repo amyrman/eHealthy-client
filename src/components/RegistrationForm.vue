@@ -19,6 +19,10 @@ export default {
   }),
   methods: {
     async submitForm() {
+      // Validate the form inputs // TODO: Fix validation
+      // if (!this.$refs.form.validate()) {
+      //   return
+      // }
       try {
         const response = await http.post('/users/register', {
           firstname: this.first,
@@ -48,7 +52,7 @@ export default {
 
 <template>
   <v-card class="mx-auto" max-width="344" title="User Registration">
-    <v-form @submit.prevent="submitForm">
+    <v-form @submit.prevent="submitForm" ref="form">
       <v-text-field
         v-model="first"
         color="primary"
