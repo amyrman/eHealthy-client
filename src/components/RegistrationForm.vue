@@ -38,9 +38,16 @@ export default {
           this.errorMessage = 'Registration failed. Please try again.'
         }
       } catch (error) {
-        // An error occurred while trying to send the request
-        // This could be a network error, or some other issue
-        this.errorMessage = 'An error occurred. Please try again.'
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          this.errorMessage = handleStatusCode(error.response.status)
+        } else {
+          // The request was made but no response was received
+          // This could be due to a network error, or some other issue
+          this.errorMessage =
+            "We're having trouble processing your request. Please check your internet connection, try again later, or contact our support if the problem persists."
+        }
       }
     }
   },
