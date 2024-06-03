@@ -1,6 +1,7 @@
 <script lang="ts">
 import { emailRules, passwordRules } from '../utils/formRules'
 import http from '../http-common'
+import ErrorMessage from './ErrorMessage.vue'
 
 export default {
   data: () => ({
@@ -33,6 +34,9 @@ export default {
         this.errorMessage = 'An error occurred. Please try again.'
       }
     }
+  },
+  components: {
+    ErrorMessage
   }
 }
 </script>
@@ -70,6 +74,6 @@ export default {
       </v-btn>
     </v-card-actions>
   </v-form>
-    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+  <ErrorMessage :message="errorMessage" />
   </v-card>
 </template>
