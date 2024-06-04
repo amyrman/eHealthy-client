@@ -1,7 +1,9 @@
 <script lang="ts">
 import { emailRules, passwordRules, firstRules, lastRules, termsRules } from '../utils/formRules'
-import http from '../http-common'
+import { handleStatusCode } from '@/utils/helpers'
+import http from '@/http-common'
 import ErrorMessage from './ErrorMessage.vue'
+import axios from 'axios'
 
 export default {
   data: () => ({
@@ -19,7 +21,7 @@ export default {
   }),
   methods: {
     async submitForm() {
-      // Validate the form inputs // TODO: Fix validation
+      // Validate the form inputs // TODO: Test validation
       // if (!this.$refs.form.validate()) {
       //   return
       // }
@@ -37,16 +39,24 @@ export default {
           // The server responded with a status other than 201 CREATED
           this.errorMessage = 'Registration failed. Please try again.'
         }
-      } catch (error) {
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          this.errorMessage = handleStatusCode(error.response.status)
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            this.errorMessage = handleStatusCode(error.response.status)
+          } else {
+            // The request was made but no response was received
+            // This could be due to a network error, or some other issue
+            this.errorMessage =
+              "We're having trouble processing your request. Please check your internet connection, try again later, or contact our support if the problem persists."
+          }
+        } else if (error instanceof Error) {
+          // Handle other types of errors that are instances of Error
+          this.errorMessage = `An error occurred: ${error.message}`
         } else {
-          // The request was made but no response was received
-          // This could be due to a network error, or some other issue
-          this.errorMessage =
-            "We're having trouble processing your request. Please check your internet connection, try again later, or contact our support if the problem persists."
+          // Handle any other type of error
+          this.errorMessage = 'An unexpected error occurred. Please try again later.'
         }
       }
     }
@@ -61,6 +71,7 @@ export default {
   <v-card class="mx-auto" max-width="344" title="User Registration">
     <v-form @submit.prevent="submitForm" ref="form">
       <v-text-field
+        id="firstName-field"
         v-model="first"
         color="primary"
         label="First name"
@@ -69,6 +80,7 @@ export default {
       ></v-text-field>
 
       <v-text-field
+        id="lastName-field"
         v-model="last"
         color="primary"
         label="Last name"
@@ -77,6 +89,7 @@ export default {
       ></v-text-field>
 
       <v-text-field
+        id="email-field"
         v-model="email"
         color="primary"
         label="Email"
@@ -85,6 +98,7 @@ export default {
       ></v-text-field>
 
       <v-text-field
+        id="password-field"
         v-model="password"
         color="primary"
         label="Password"
@@ -94,6 +108,7 @@ export default {
       ></v-text-field>
 
       <v-checkbox
+        id="terms-checkbox"
         v-model="terms"
         color="secondary"
         label="I agree to site terms and conditions"
