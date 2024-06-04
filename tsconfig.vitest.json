@@ -1,5 +1,6 @@
 {
   "extends": "./tsconfig.app.json",
+  "include": ["src/**/*", "test/**/*.test.ts"],
   "exclude": [],
   "compilerOptions": {
     "noEmit": false,
@@ -7,6 +8,6 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
 
     "lib": [],
-    "types": ["node", "jsdom"]
+    "types": ["node", "happy-dom", "vitest/globals"]
   }
 }
