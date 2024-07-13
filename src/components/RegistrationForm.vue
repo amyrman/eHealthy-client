@@ -1,6 +1,6 @@
 <script lang="ts">
 import { emailRules, passwordRules, firstRules, lastRules, termsRules } from '../utils/formRules'
-import { handleStatusCode } from '@/utils/helpers'
+import { handleStatusCode } from '@/utils/httpStatusHandlers'
 import http from '@/http-common'
 import ErrorMessage from './ErrorMessage.vue'
 import axios from 'axios'
