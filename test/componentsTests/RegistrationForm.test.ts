@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { mount, VueWrapper } from '@vue/test-utils'
 import http from '@/http-common'
 import RegistrationForm from '@/components/RegistrationForm.vue'
 import {
@@ -6,21 +6,19 @@ import {
   passwordRules,
   firstNameRules,
   lastNameRules,
-  termsRules // TODO: test this?
+  termsRules // TODO: include in test?
 } from '@/utils/formRules'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
 
 const vuetify = createVuetify({
-  components,
-  directives,
+  components
 })
 
 vi.mock('@/http-common')
 
 describe('RegistrationForm.vue', () => {
-  let wrapper: any
+  let wrapper: VueWrapper
 
   beforeEach(() => {
     wrapper = mount(RegistrationForm, {
@@ -42,20 +40,20 @@ describe('RegistrationForm.vue', () => {
     const firstNameInput = wrapper.find('#firstName-field')
     const lastNameInput = wrapper.find('#lastName-field')
     const termsCheckbox = wrapper.find('#terms-checkbox')
-  
+
     await emailInput.setValue('not an email')
     await passwordInput.setValue('short')
     await firstNameInput.setValue('')
     await lastNameInput.setValue('')
     await termsCheckbox.setValue(false)
-  
+
     await wrapper.find('form').trigger('submit.prevent')
 
     expect(wrapper.text()).toContain(passwordRules[1]('short'))
     expect(wrapper.text()).toContain(firstNameRules[0](''))
     expect(wrapper.text()).toContain(lastNameRules[0](''))
     expect(wrapper.text()).toContain(emailRules[1]('not an email'))
-      
+
     expect(http.post).not.toHaveBeenCalled()
   })
 
