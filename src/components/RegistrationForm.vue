@@ -21,10 +21,13 @@ export default {
   }),
   methods: {
     async submitForm() {
-      // Validate the form inputs // TODO: Test validation
-      // if (!this.$refs.form.validate()) {
-      //   return
-      // }
+      // Validate user input
+      const form = this.$refs.form as any
+      const { valid } = await form.validate()
+      if (!valid) {
+        this.errorMessage = 'Please fill out all required fields correctly.'
+        return
+      }
       try {
         const response = await http.post('/users/register', {
           firstName: this.firstName,
@@ -32,12 +35,9 @@ export default {
           email: this.email,
           password: this.password
         })
-
-        if (response.status === 201) {
+        // check so that response is not null, then check for 201 CREATED
+        if (response && response.status === 201) {
           this.$router.push('/login')
-        } else {
-          // The server responded with a status other than 201 CREATED
-          this.errorMessage = 'Registration failed. Please try again.'
         }
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
