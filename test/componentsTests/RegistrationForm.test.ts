@@ -4,9 +4,9 @@ import RegistrationForm from '@/components/RegistrationForm.vue'
 import {
   emailRules,
   passwordRules,
-  firstRules,
-  lastRules,
-  termsRules
+  firstNameRules,
+  lastNameRules,
+  termsRules // TODO: test this?
 } from '@/utils/formRules'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
@@ -52,8 +52,8 @@ describe('RegistrationForm.vue', () => {
     await wrapper.find('form').trigger('submit.prevent')
 
     expect(wrapper.text()).toContain(passwordRules[1]('short'))
-    expect(wrapper.text()).toContain(firstRules[0](''))
-    expect(wrapper.text()).toContain(lastRules[0](''))
+    expect(wrapper.text()).toContain(firstNameRules[0](''))
+    expect(wrapper.text()).toContain(lastNameRules[0](''))
     expect(wrapper.text()).toContain(emailRules[1]('not an email'))
       
     expect(http.post).not.toHaveBeenCalled()
@@ -77,8 +77,8 @@ describe('RegistrationForm.vue', () => {
 
     await wrapper.vm.submitForm()
     expect(http.post).toHaveBeenCalledWith('/users/register', {
-      firstname: 'John',
-      lastname: 'Doe',
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'test@example.com',
       password: 'validpassword'
     })

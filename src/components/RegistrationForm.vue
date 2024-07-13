@@ -1,5 +1,5 @@
 <script lang="ts">
-import { emailRules, passwordRules, firstRules, lastRules, termsRules } from '../utils/formRules'
+import { emailRules, passwordRules, firstNameRules, lastNameRules, termsRules } from '../utils/formRules'
 import { handleStatusCode } from '@/utils/httpStatusHandlers'
 import http from '@/http-common'
 import ErrorMessage from './ErrorMessage.vue'
@@ -7,15 +7,15 @@ import axios from 'axios'
 
 export default {
   data: () => ({
-    first: null,
-    last: null,
+    firstName: null,
+    lastName: null,
     email: null,
     password: null,
     terms: false,
     emailRules,
     passwordRules,
-    firstRules,
-    lastRules,
+    firstNameRules,
+    lastNameRules,
     termsRules,
     errorMessage: ''
   }),
@@ -27,8 +27,8 @@ export default {
       // }
       try {
         const response = await http.post('/users/register', {
-          firstname: this.first,
-          lastname: this.last,
+          firstname: this.firstName,
+          lastname: this.lastName,
           email: this.email,
           password: this.password
         })
@@ -72,20 +72,20 @@ export default {
     <v-form @submit.prevent="submitForm" ref="form">
       <v-text-field
         id="firstName-field"
-        v-model="first"
+        v-model="firstName"
         color="primary"
         label="First name"
         variant="underlined"
-        :rules="firstRules"
+        :rules="firstNameRules"
       ></v-text-field>
 
       <v-text-field
         id="lastName-field"
-        v-model="last"
+        v-model="lastName"
         color="primary"
         label="Last name"
         variant="underlined"
-        :rules="lastRules"
+        :rules="lastNameRules"
       ></v-text-field>
 
       <v-text-field

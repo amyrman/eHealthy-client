@@ -8,9 +8,9 @@ export const passwordRules = [
   (value: string) =>
     value && value.length >= 8 ? true : 'Password must be at least 8 characters long.'
 ]
-export const firstRules = [(value: string) => (value ? true : 'First name is required.')]
+export const firstNameRules = [(value: string) => (value ? true : 'First name is required.')]
 
-export const lastRules = [(value: string) => (value ? true : 'Last name is required.')]
+export const lastNameRules = [(value: string) => (value ? true : 'Last name is required.')]
 
 export const termsRules = [
   (value: boolean) => (value ? true : 'You must accept the terms and conditions.')
