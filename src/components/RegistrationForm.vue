@@ -27,8 +27,8 @@ export default {
       // }
       try {
         const response = await http.post('/users/register', {
-          firstname: this.firstName,
-          lastname: this.lastName,
+          firstName: this.firstName,
+          lastName: this.lastName,
           email: this.email,
           password: this.password
         })
