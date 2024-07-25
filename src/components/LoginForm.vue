@@ -18,11 +18,11 @@ export default {
           email: this.email,
           password: this.password
         })
-
+// TODO: improve error ux
         if (response.status === 200) {
           // Login was successful
           // You might want to store the user's token and redirect them to a dashboard
-          localStorage.setItem('user-token', response.data.token)
+          // localStorage.setItem('user-token', response.data.token)
           this.$router.push('/dashboard')
         } else {
           // The server responded with a status other than 200 OK
