@@ -18,7 +18,7 @@ To get a local copy up and running, follow these steps:
     Open your terminal and run:
 
     ```
-    git clone https://github.com/your_username/eHealthy-client.git
+    git clone https://github.com/amyrman/eHealthy-client.git
     ```
 
 2. **Install dependencies**
